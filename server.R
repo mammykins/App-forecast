@@ -1,78 +1,50 @@
 library(shiny)
 
-#  Define server logic required to draw figure
 #  initialisation of server.R
 shinyServer(function(input, output) {
   
+  #REACTIVE
+  #  prevent Shiny from re-running unnecessary code
+  #  Note how we assign the reactive to dataInput
+  #  then when we call it later we use dataInput(), else error
+  #  see ?forecast for default method, mostly will be ETS for this time series type
+  dataInput <- reactive({ts(data = ukdata[, input$voi], end = todays_yr_qtr, frequency = 4) %>%
+      na.omit() %>%  #  make quarterly time series, forecast, create zra class
+      zra_custom(FP = input$h, SL = input$confidence_levels)
+  })
+  
+  
   output$plot_zra <- renderDygraph({
-    #reactive()#h <- input$h
-    #confidence_levels <- input$confidence_levels
-    #voi <- input$voi
     
-    #SELECT DATA
-    ukdata_ts <- ts(data = ukdata[, input$voi], end = todays_yr_qtr, frequency = 4) %>%
-      na.omit()  #  problematic if there are gaps in your data!
-    
-    #PLOT
-    zra <- zra_custom(ukdata_ts, FP = input$h, SL = input$confidence_levels)
-    #  gap bug caused by startvalue <- end(data)[1] + 1, should be 0.25 for quarterly
-    
-    plot(zra) %>% #  What is the default forecast? Depends on the class of the object, default for ts is ETS. See ?forecast
+   
+    plot(dataInput()) %>% 
       dyLegend(show = "onmouseover", hideOnMouseOut = TRUE,
                width = 500, labelsSeparateLines = FALSE)
-      #  We did all that work, ashame not to use ARIMA for TPI
+    #  We did all that work, ashame not to use ARIMA for TPI, add check box later
     #  However, this ZRA package is useful starting point and ETS may be better default
-    #  Assume the forecast package knows more than we do.
+    #  Assume Hyndman's forecast package knows more than we do.
 
   })
-  # Generate a summary of the forecast (inefficient and time consuming as repeated)
-  output$summary <- renderTable({
-    
-    max_forecast <- todays_yr_qtr + input$h / 4 
-    ukdata_ts <- ts(data = ukdata[, input$voi],
-                    end = todays_yr_qtr, frequency = 4) %>%
-      na.omit()
-    
-    zra <- zra_custom(ukdata_ts, FP = input$h, SL = input$confidence_levels)
-    
+
+    output$summary <- renderTable({
+      
     #http://stackoverflow.com/questions/26507806/display-xtable-in-shiny
-    
-    #xtable((as.zoo(zra$series)))
-    #print(tail(zra$series))
-    xtable(as.zooreg(zra$piv1))
-    #xtable(as.zooreg(zra$piv2))
-    
-    
+    xtable(as.zooreg(dataInput()$piv1))
+
   })
   
   output$summary2 <- renderTable({
     
-    max_forecast <- todays_yr_qtr + input$h / 4 
-    ukdata_ts <- ts(data = ukdata[, input$voi],
-                    end = todays_yr_qtr, frequency = 4) %>%
-      na.omit()
-    
     zra <- zra_custom(ukdata_ts, FP = input$h, SL = input$confidence_levels)
     
     #http://stackoverflow.com/questions/26507806/display-xtable-in-shiny
-    
-    #xtable((as.zoo(zra$series)))
-    #print(tail(zra$series))
-    #xtable(as.zooreg(zra$piv1))
-    xtable(as.zooreg(zra$piv2))
-    
+    xtable(as.zooreg(dataInput()$piv2))
     
   })
   
   output$inflation <- renderPrint({
     
-    max_forecast <- todays_yr_qtr + input$h / 4 
-    ukdata_ts <- ts(data = ukdata[, input$voi], end = todays_yr_qtr, frequency = 4) %>%
-      na.omit()
-    
-    zra <- zra_custom(ukdata_ts, FP = input$h, SL = input$confidence_levels)
-    
-    pred_inflation <- inflation(tail(ukdata_ts, 1), zra$fit1)
+    pred_inflation <- inflation(tail(ukdata_ts, 1), dataInput()$fit1)
     
     pred_inflation %>%
       zooreg(frequency = 4, start = end(ukdata_ts) + 0.25) %>%
