@@ -35,9 +35,10 @@ shinyUI(fluidPage(
                              min = 0.50, max = 0.99,
                              value = c(0.80, 0.95)),
       #checkboxInput("legend", label = "Disable legend", value = "never"),
+                 #numericInput(inputId = "monies", label = "Monies", value = 100,
+                  #            min = 0, max = NA, step = NA, width = NULL),
                  br(),
                  submitButton("Forecast"),
-                 br(),
                  br(),
                  img(src = "efa_logo.png", height = 72, width = 72),
                  br(),
@@ -56,18 +57,22 @@ shinyUI(fluidPage(
       h4("Percentage inflation of forecast values relative to the most recent Quarter's value:"),
       verbatimTextOutput("inflation"),
       br(),
-      h4("Normal forecast point estimates (fit) and prediction intervals (upper and lower) if you anticipate typical market behaviour:"),
-      tags$head( tags$style( HTML('#summary table {border-collapse:collapse; } 
+      h4("Normal forecast point estimates (mean) and prediction intervals (upper and lower) if you anticipate typical market behaviour:"),
+      #tags$head( tags$style( HTML('#summary table {border-collapse:collapse; } 
                              #summary table th { transform: rotate(-45deg)}'))),
       tableOutput("summary"),
       br(),
       h4("Conservative forecast intervals if uncertainity is high:"),
-      tags$head( tags$style( HTML('#summary table {border-collapse:collapse; } 
-                                  #summary table th { transform: rotate(-45deg)}'))),
+      tags$head( tags$style( HTML('#summary2 table {border-collapse:collapse; } 
+                                  #summary2 table th { transform: rotate(-45deg)}'))),
       tableOutput("summary2"),
       br(),
-      downloadButton('downloadData', 'Download forecast'),
+      #downloadButton('downloadData', 'Download forecast'),
       tags$blockquote("Prediction is very difficult, especially if it's about the future.", cite = "Nils Bohr")
+
     )
+    
+    
   )
+  
 ))
