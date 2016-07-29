@@ -35,7 +35,6 @@ shinyServer(function(input, output) {
   
   output$summary2 <- renderTable({
     
-    zra <- zra_custom(ukdata_ts, FP = input$h, SL = input$confidence_levels)
     
     #http://stackoverflow.com/questions/26507806/display-xtable-in-shiny
     xtable(as.zooreg(dataInput()$piv2))
@@ -44,10 +43,10 @@ shinyServer(function(input, output) {
   
   output$inflation <- renderPrint({
     
-    pred_inflation <- inflation(tail(ukdata_ts, 1), dataInput()$fit1)
+    pred_inflation <- inflation(tail(dataInput()$series, 1), dataInput()$fit1)
     
     pred_inflation %>%
-      zooreg(frequency = 4, start = end(ukdata_ts) + 0.25) %>%
+      zooreg(frequency = 4, start = end(dataInput()$series) + 0.25) %>%
       #gsub(pattern = "(", replacement = " Q ", fixed = TRUE) %>%
       print()
     
@@ -55,6 +54,21 @@ shinyServer(function(input, output) {
     #  input$monies + ((input$monies/100)*pred_inflation) %>%
     #  zooreg(frequency = 4, start = end(ukdata_ts) + 0.25) %>%
      # print)
+  })
+  
+  output$budget <- renderPrint({
+    
+    pred_inflation <- inflation(tail(dataInput()$series, 1), dataInput()$fit1)
+    
+    pred_inflation <- pred_inflation %>%
+      zooreg(frequency = 4, start = end(dataInput()$series) + 0.25)
+      #gsub(pattern = "(", replacement = " Q ", fixed = TRUE) %>%
+      #print()
+    
+    # paste("The predicted value of your monies is ",
+    input$monies + ((input$monies/100)*pred_inflation) %>%
+      zooreg(frequency = 4, start = end(dataInput()$series) + 0.25) %>%
+      print()
   })
   
 #  http://shiny.rstudio.com/articles/download.html
