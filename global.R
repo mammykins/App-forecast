@@ -15,7 +15,7 @@ library(xtable)
 #READ DATA
 #  this data needs to be up-to-date to the most recent quarters
 #  For TPI older time points may need to be changed as the BCIS fix
-#  the data after they receive a sample size of30 or so,
+#  the data after they receive a sample size of 30 or so,
 #  or after 18 months generally, this means we are forecasting off
 #  of their forecasts
 ukdata <- paste("master_data", ".csv", sep = "")  #  file should be located in wd
@@ -24,10 +24,10 @@ ukdata <- read.csv(ukdata,
                    header = TRUE)  # in tidy dataframe format, one row per observation
 
 # SOURCES -----------------------------------------------------------------
-#  TPI  UK BCIS subscription, Adam Bray or Vicky Brooks
+#  TPI   UK BCIS subscription, Adam Bray or Vicky Brooks
 #  RPIX  https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/chmk/mm23
-#  CPI
-#  GDP
+#  CPI All-Items Index  https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/d7bt/mm23
+#  GDP  ... can't find quarterly easy access, ask Adam Bray
 
 # DATE --------------------------------------------------------------------
 #TODAY's DATE

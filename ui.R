@@ -46,7 +46,13 @@ shinyUI(fluidPage(
                  br(),
                  br(),
                  "Developed by ",
-                 span("Dr Matthew Gregory.", style = "color:blue")
+                 span("Dr Matthew Gregory.", style = "color:blue"),
+                 br(),
+                 h6("Data sources: ",
+                    a(href = "https://www.gov.uk/government/statistics/bis-prices-and-cost-indices", "TPI"),
+                    a(href = "https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/chmk/mm23", "RPIX"),
+                    a(href = "https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/d7bt/mm23", "CPI"),
+                    a(href = "https://en.wikipedia.org/wiki/HTTP_404", "GDP"))
                  
     ),
     
