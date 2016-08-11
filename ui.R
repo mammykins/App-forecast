@@ -12,14 +12,21 @@ shinyUI(fluidPage(
   # Sidebar with a slider input for the forecast horizon and drop down selection for voi
   sidebarLayout(
     sidebarPanel(
+      p("This app forecasts different types of inflation pertinent to the construction industry.
+        This allows informed budgeting by considering future costs of projects based on relevant
+        predicted inflation indices. The Tender Price Index (TPI) affects the cost of a building
+        with the Retail Price Index (RPIX) and Consumer Price Index (CPI) affecting other components
+        of a social infrastructure construction project, such as costs of; furniture, fixtures and fittings.",
+        style = "font-family: 'times'; font-si16pt"),
+      br(),
       h4("User input"),
-                 br(),
+                 #br(),
                  p("Choose the parameters for your custom forecast."),
                  #br(),
                  #  Build type selection
                  selectInput(inputId = "voi", label = "Select variable of interest:",
                              choices = c("UK BCIS Tender Price Index" = "tpi", 
-                               "RPIX" = "rpix",
+                               "Retail Price Index X" = "rpix",
                                "Consumer Price Index" = "cpi",           
                                "Gross Domestic Product" = "gdp")
                              ),
@@ -30,19 +37,19 @@ shinyUI(fluidPage(
                              min = 0,
                              max = 12,
                              value = 8),
-                 br(),
+                 #br(),
                  sliderInput("confidence_levels", label = "Prediction Intervals",
                              min = 0.50, max = 0.99,
                              value = c(0.80, 0.95)),
-                 br(),
+                 #br(),
       
       #checkboxInput("legend", label = "Disable legend", value = "never"),
                  numericInput(inputId = "monies", label = "Capital Budget (if relevant)", value = 100,
                             min = 0, max = NA, step = NA, width = NULL),
-                 br(),
+                 #br(),
                  submitButton("Forecast"),
                  br(),
-                 img(src = "efa_logo.png", height = 72, width = 72),
+                 img(src = "efa_logo.png", height = 144, width = 144),
                  br(),
                  br(),
                  "Developed by ",
@@ -52,7 +59,8 @@ shinyUI(fluidPage(
                     a(href = "https://www.gov.uk/government/statistics/bis-prices-and-cost-indices", "TPI"),
                     a(href = "https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/chmk/mm23", "RPIX"),
                     a(href = "https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/d7bt/mm23", "CPI"),
-                    a(href = "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/grossdomesticproductpreliminaryestimate/aprtojune2016", "GDP"))
+                    a(href = "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/grossdomesticproductpreliminaryestimate/aprtojune2016", "GDP")),
+                  h6("Code: ", a(href = "https://github.com/mammykins/App-forecast", "Github"))
                  
     ),
     
