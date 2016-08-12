@@ -19,7 +19,17 @@ shinyServer(function(input, output) {
    
     plot(dataInput()) %>% 
       dyLegend(show = "onmouseover", hideOnMouseOut = TRUE,
-               width = 500, labelsSeparateLines = FALSE)
+               width = 500, labelsSeparateLines = FALSE) %>%
+      dyShading(from = "2008-4-1", to = "2009-4-1") %>%  #  Great Recession
+       dyEvent("2008-4-1", "Great Recession", labelLoc = "bottom", color = "yellow") %>%
+      #dyAnnotation("2008-4-1", text = "C", tooltip = "Great Recession") %>%
+      dyShading(from = "1990-7-1", to = "1991-7-1") %>%  #  Early 90s recession
+       dyEvent("1990-7-1", "Early '90s recession", labelLoc = "bottom", color = "yellow") %>%
+      dyShading(from = "1980-1-1", to = "1981-1-1") %>%  #  Early 80s recession
+       dyEvent("1980-1-1", "Early '80s recession", labelLoc = "bottom", color = "yellow")
+      
+      
+    #  https://en.wikipedia.org/wiki/List_of_recessions_in_the_United_Kingdom
     #  We did all that work, ashame not to use ARIMA for TPI, add check box later
     #  However, this ZRA package is useful starting point and ETS may be better default
     #  Assume Hyndman's forecast package knows more than we do.

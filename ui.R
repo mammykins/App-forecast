@@ -59,7 +59,9 @@ shinyUI(fluidPage(
                     a(href = "https://www.gov.uk/government/statistics/bis-prices-and-cost-indices", "TPI"),
                     a(href = "https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/chmk/mm23", "RPIX"),
                     a(href = "https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/d7bt/mm23", "CPI"),
-                    a(href = "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/grossdomesticproductpreliminaryestimate/aprtojune2016", "GDP")),
+                    a(href = "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/grossdomesticproductpreliminaryestimate/aprtojune2016", "GDP"),
+                    a(href = "https://en.wikipedia.org/wiki/List_of_recessions_in_the_United_Kingdom", "Recessions")
+                    ),
                   h6("Code: ", a(href = "https://github.com/mammykins/App-forecast", "Github"))
                  
     ),
