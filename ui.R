@@ -74,8 +74,8 @@ shinyUI(fluidPage(
       br(),
       h4("Percentage inflation of forecast values relative to the most recent Quarter's value through the forecast horizon:"),
       tableOutput("inflation"),
-      h4("Change-in and new total for the Capital Budget after inflation:"),
-      verbatimTextOutput("budget"),
+      h4("New total for the Capital Budget after inflation:"),
+      tableOutput("budget"),
       br(),
       h4("Normal forecast point estimates (mean) and prediction intervals (upper and lower) if you anticipate typical market behaviour:"),
       #tags$head( tags$style( HTML('#summary table {border-collapse:collapse; } 

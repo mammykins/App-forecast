@@ -66,7 +66,7 @@ shinyServer(function(input, output) {
      # print)
   })
   
-  output$budget <- renderPrint({
+  output$budget <- renderTable({
     
     pred_inflation <- inflation(tail(dataInput()$series, 1), dataInput()$fit1)
     
@@ -78,7 +78,7 @@ shinyServer(function(input, output) {
     # paste("The predicted value of your monies is ",
     input$monies + ((input$monies/100)*pred_inflation) %>%
       zooreg(frequency = 4, start = end(dataInput()$series) + 0.25) %>%
-      print()
+      xtable()
   })
   
 #  http://shiny.rstudio.com/articles/download.html
