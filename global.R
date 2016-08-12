@@ -43,6 +43,12 @@ inflation_percentage <- round(x = ((forecasted_point_estimates - base_year_value
 return(inflation_percentage)
 }
 
+zoo.to.data.frame <- function(x, index.name="Date") {
+  stopifnot(is.zoo(x))
+  xn <- if( is.null(dim(x)) ) deparse(substitute(x)) else colnames(x)
+  setNames(data.frame(index(x), x, row.names = NULL), c(index.name,xn))
+}
+
 #ZRA custom
 #  changed startvalue <- end(data) + 1 due to quarterly data
 zra_custom <- function(data, FP = 10, SL = c(0.8, 0.95), ...) 

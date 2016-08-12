@@ -73,7 +73,7 @@ shinyUI(fluidPage(
       hr(),
       br(),
       h4("Percentage inflation of forecast values relative to the most recent Quarter's value through the forecast horizon:"),
-      verbatimTextOutput("inflation"),
+      tableOutput("inflation"),
       h4("Change-in and new total for the Capital Budget after inflation:"),
       verbatimTextOutput("budget"),
       br(),
