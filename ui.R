@@ -18,7 +18,9 @@ shinyUI(fluidPage(
         with the Retail Price Index (RPIX) and Consumer Price Index (CPI) affecting other components
         of a social infrastructure construction project, such as costs of; furniture, fixtures and fittings.",
         style = "font-family: 'times'; font-si16pt"),
-      br(),
+      #br(),
+      p("CAVEAT: this forecasting method is inappropriate during a recession."),
+      #br(),
       h4("User input"),
                  #br(),
                  p("Choose the parameters for your custom forecast."),

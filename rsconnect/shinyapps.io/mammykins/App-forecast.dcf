@@ -2,9 +2,9 @@ name: App-forecast
 account: mammykins
 server: shinyapps.io
 appId: 119397
-bundleId: 530433
+bundleId: 537837
 url: https://mammykins.shinyapps.io/App-forecast/
-when: 1471010951.59837
+when: 1471877637.83312
 asMultiple: FALSE
 asStatic: FALSE
-ignoredFiles: forecast_dev.R|forecast_dev2.R|master_data_sensitive.csv|server_safe.R
+ignoredFiles: forecast_dev.R|forecast_dev2.R|server_safe.R
