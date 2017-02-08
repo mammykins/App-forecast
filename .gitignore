@@ -1,0 +1,13 @@
+# Rstudio files
+
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+# Crap files
+
+forecast_dev.R
+forecast_dev2.R
+server_safe.R
+rsconnect
