@@ -7,11 +7,12 @@ if (!require("shiny")) {
 shinyUI(fluidPage(
   
   # Application title
-  titlePanel("Forecasting time series"),
+  titlePanel("Portender App"),
   
   # Sidebar with a slider input for the forecast horizon and drop down selection for voi
   sidebarLayout(
     sidebarPanel(
+      h2("Forecasting time series"),
       p("This app forecasts different types of inflation pertinent to the construction industry.
         This allows informed budgeting by considering future costs of projects based on relevant
         predicted inflation indices. The Tender Price Index (TPI) affects the cost of a building
@@ -19,7 +20,7 @@ shinyUI(fluidPage(
         of a social infrastructure construction project, such as costs of; furniture, fixtures and fittings.",
         style = "font-family: 'times'; font-si16pt"),
       #br(),
-      p("CAVEAT: this forecasting method is inappropriate during a recession."),
+      # p("CAVEAT: this forecasting method is inappropriate during a recession."),
       #br(),
       h4("User input"),
                  #br(),
