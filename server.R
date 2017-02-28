@@ -54,7 +54,7 @@ shinyServer(function(input, output) {
   
   output$inflation <- renderTable({
     
-    pred_inflation <- inflation(tail(dataInput()$series, 1), dataInput()$fit1)
+    pred_inflation <- inflation(tail(dataInput()$series, 1)[1], dataInput()$fit1[1:input$h])
     
     pred_inflation %>%
       zooreg(frequency = 4, start = end(dataInput()$series) + 0.25) %>%
@@ -69,7 +69,7 @@ shinyServer(function(input, output) {
   
   output$budget <- renderTable({
     
-    pred_inflation <- inflation(tail(dataInput()$series, 1), dataInput()$fit1)
+    pred_inflation <- inflation(tail(dataInput()$series, 1)[1], dataInput()$fit1[1:input$h])
     
     pred_inflation <- pred_inflation %>%
       zooreg(frequency = 4, start = end(dataInput()$series) + 0.25)  
